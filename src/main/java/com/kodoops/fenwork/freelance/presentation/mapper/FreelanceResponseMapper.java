@@ -90,4 +90,12 @@ public class FreelanceResponseMapper {
                 category.getName(),
                 category.getDescription());
     }
+
+
+
+    public static List<FreelanceResponse> toResponseList(List<Freelance> freelances) {
+        return freelances.stream()
+                .map(FreelanceResponseMapper::toResponse)
+                .collect(Collectors.toList());
+    }
 }

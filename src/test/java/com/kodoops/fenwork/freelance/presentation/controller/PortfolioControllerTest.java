@@ -58,7 +58,7 @@ class PortfolioControllerTest {
 
         mockMvc.perform(get("/api/freelances/1/portfolio"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(1))
-                .andExpect(jsonPath("$[0].projectId").value("project1"));
+                .andExpect(jsonPath("$.data.length()").value(1))
+                .andExpect(jsonPath("$.data[0].projectId").value("project1"));
     }
 }

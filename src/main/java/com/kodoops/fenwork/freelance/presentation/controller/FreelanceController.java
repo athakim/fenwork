@@ -4,6 +4,7 @@ import com.kodoops.fenwork.freelance.application.service.FreelanceService;
 import com.kodoops.fenwork.freelance.domain.vo.Availability;
 import com.kodoops.fenwork.freelance.domain.model.Freelance;
 import com.kodoops.fenwork.freelance.presentation.mapper.FreelanceResponseMapper;
+import com.kodoops.fenwork.freelance.presentation.mapper.PortfolioResponseMapper;
 import com.kodoops.fenwork.freelance.presentation.request.FreelanceRequest;
 import com.kodoops.fenwork.freelance.presentation.response.FreelanceResponse;
 import com.kodoops.fenwork.freelance.presentation.response.ResponseDto;
@@ -32,7 +33,7 @@ public class FreelanceController {
     public ResponseEntity<ResponseDto> createFreelance(@Valid @RequestBody FreelanceRequest freelance) {
         String message = "Freelance crée avec succès.";
 
-        return ResponseEntity.ok(getOkFreelanceResponseDto(freelanceService.createFreelance(freelance), message));
+        return ResponseEntity.ok(getOkFreelanceResponseDto(freelanceService.createFreelance(freelance), message, HttpStatus.CREATED));
     }
 
     @PutMapping("/{id}")
@@ -49,13 +50,13 @@ public class FreelanceController {
         );
         String message = "Les ifnormations du freelance ont été mises a jour.";
 
-        return ResponseEntity.ok(getOkFreelanceResponseDto(freelanceService.updateFreelance(id, freelance),message));
+        return ResponseEntity.ok(getOkFreelanceResponseDto(freelanceService.updateFreelance(id, freelance),message, HttpStatus.OK));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDto> getFreelanceById(@PathVariable String id) {
         String message = "Freelance trouvé.";
-        return ResponseEntity.ok(getOkFreelanceResponseDto(freelanceService.getFreelanceById(id), message));
+        return ResponseEntity.ok(getOkFreelanceResponseDto(freelanceService.getFreelanceById(id), message, HttpStatus.OK));
     }
 
     @GetMapping
@@ -69,27 +70,29 @@ public class FreelanceController {
     public ResponseEntity<ResponseDto> deleteFreelanceById(@PathVariable String id) {
         String message = "Freelance supprimé.";
         freelanceService.deleteFreelance(id);
-        return ResponseEntity.ok(getOkResponse(null, message));
+        return ResponseEntity.ok(getOkResponse(null, message, HttpStatus.OK));
     }
 
     public static ResponseDto getOkFreelancesResponsesDto(List<Freelance> freelances, String message) {
-        List<FreelanceResponse> freelancesDtos =
-                freelances.stream().map(FreelanceResponseMapper::toResponse).toList();
-        return getOkResponse(freelancesDtos, message);
+
+        return getOkResponse(FreelanceResponseMapper.toResponseList(freelances), message, HttpStatus.OK);
     }
 
-    public static ResponseDto getOkFreelanceResponseDto(Freelance freelance, String message) {
+    public static ResponseDto getOkFreelanceResponseDto(Freelance freelance, String message, HttpStatus status) {
         FreelanceResponse freelanceDto = FreelanceResponseMapper.toResponse(freelance);
 
-        return getOkResponse( freelanceDto, message);
+        return getOkResponse( freelanceDto, message, status);
     }
 
-    public static ResponseDto getOkResponse(Object data, String message) {
+    public static ResponseDto getOkResponse(Object data, String message, HttpStatus status) {
+        if (status == null) {
+            status = HttpStatus.OK;
+        }
         return new ResponseDto(
                 data,
                 message,
                 LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME),
-                HttpStatus.OK.value()
+                status.value()
         );
     }
 }
