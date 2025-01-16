@@ -1,10 +1,7 @@
 package com.kodoops.fenwork.freelance.application.config;
 
 import com.kodoops.fenwork.freelance.application.service.*;
-import com.kodoops.fenwork.freelance.domain.repository.FreelanceRepository;
-import com.kodoops.fenwork.freelance.domain.repository.PortfolioRepository;
-import com.kodoops.fenwork.freelance.domain.repository.SkillCategoryRepository;
-import com.kodoops.fenwork.freelance.domain.repository.SkillRepository;
+import com.kodoops.fenwork.freelance.domain.repository.*;
 import com.kodoops.fenwork.freelance.infrastructure.persistence.FreelanceRepositoryImpl;
 import com.kodoops.fenwork.freelance.infrastructure.persistence.SkillRepositoryImpl;
 import org.springframework.context.annotation.Bean;
@@ -17,12 +14,14 @@ public class ServicesConfig {
     private final SkillRepository skillRepository;
     private final SkillCategoryRepository skillCategoryRepository;
     private final PortfolioRepository portfolioRepository;
+    private final EvaluationRepository evaluationRepository;
 
-    public ServicesConfig(FreelanceRepository freelanceRepository, SkillRepository skillRepository, SkillCategoryRepository skillCategoryRepository, PortfolioRepository portfolioRepository) {
+    public ServicesConfig(FreelanceRepository freelanceRepository, SkillRepository skillRepository, SkillCategoryRepository skillCategoryRepository, PortfolioRepository portfolioRepository, EvaluationRepository evaluationRepository) {
         this.freelanceRepository = freelanceRepository;
         this.skillRepository = skillRepository;
         this.skillCategoryRepository = skillCategoryRepository;
         this.portfolioRepository = portfolioRepository;
+        this.evaluationRepository = evaluationRepository;
     }
 
     @Bean
@@ -43,7 +42,7 @@ public class ServicesConfig {
 
     @Bean
     public EvaluationService evaluationService(){
-        return new EvaluationService(freelanceService());
+        return new EvaluationService(freelanceService(), evaluationRepository);
     }
 
     @Bean

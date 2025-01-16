@@ -79,7 +79,9 @@ public class FreelanceMapper {
 
         // Mapper les évaluations
         List<EvaluationEntity> evaluationEntities = domain.getEvaluations().stream()
-                .map(EvaluationMapper::toEntity)
+                .map(evaluation -> {
+                    return EvaluationMapper.toEntity(evaluation, entity);
+                })
                 .toList();
         entity.setEvaluations(evaluationEntities);
 

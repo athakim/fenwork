@@ -2,6 +2,7 @@ package com.kodoops.fenwork.freelance.presentation.controller;
 
 import com.kodoops.fenwork.freelance.application.service.EvaluationService;
 import com.kodoops.fenwork.freelance.domain.model.Evaluation;
+import com.kodoops.fenwork.freelance.presentation.request.EvaluationRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class EvaluationController {
     public ResponseEntity<Evaluation> addEvaluationToProject(
             @PathVariable String freelanceId,
             @PathVariable String projectId,
-            @Valid @RequestBody Evaluation evaluation) {
+            @Valid @RequestBody EvaluationRequest evaluation) {
         return ResponseEntity.ok(evaluationService.addEvaluationToProject(freelanceId, projectId, evaluation));
     }
 }

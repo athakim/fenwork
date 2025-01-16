@@ -2,6 +2,7 @@ package com.kodoops.fenwork.freelance.presentation.controller;
 
 import com.kodoops.fenwork.freelance.application.service.EvaluationService;
 import com.kodoops.fenwork.freelance.domain.model.Evaluation;
+import com.kodoops.fenwork.freelance.presentation.request.EvaluationRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -32,7 +33,7 @@ class EvaluationControllerTest {
 
     @Test
     void shouldAddEvaluationToProject() throws Exception {
-        when(evaluationService.addEvaluationToProject(eq("1"), eq("project1"), any(Evaluation.class))).thenReturn(evaluation);
+        when(evaluationService.addEvaluationToProject(eq("1"), eq("project1"), any(EvaluationRequest.class))).thenReturn(evaluation);
 
         mockMvc.perform(post("/api/freelances/1/projects/project1/evaluations")
                         .contentType(MediaType.APPLICATION_JSON)

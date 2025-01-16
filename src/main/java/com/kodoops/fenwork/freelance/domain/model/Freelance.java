@@ -94,7 +94,6 @@ public class Freelance {
     }
 
     public void updateInfo(String firstName, String lastName, String email, String profilePictureUrl, String bio) {
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -110,7 +109,7 @@ public class Freelance {
         if (!projectExists) {
             throw new IllegalArgumentException("Project with ID " + evaluation.getProjectId() + " not found in portfolio");
         }
-
+        evaluation.setFreelanceId(this.id);
         evaluations.add(evaluation);
     }
 
