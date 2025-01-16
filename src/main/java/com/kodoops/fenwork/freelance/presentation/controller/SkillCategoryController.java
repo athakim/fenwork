@@ -3,8 +3,6 @@ package com.kodoops.fenwork.freelance.presentation.controller;
 import com.kodoops.fenwork.freelance.application.service.SkillCategoryService;
 import com.kodoops.fenwork.freelance.domain.exception.FreelanceException;
 import com.kodoops.fenwork.freelance.domain.model.SkillCategory;
-import com.kodoops.fenwork.freelance.infrastructure.persistence.entity.SkillCategoryEntity;
-import com.kodoops.fenwork.freelance.presentation.mapper.PortfolioResponseMapper;
 import com.kodoops.fenwork.freelance.presentation.mapper.SkillCategoryResponseMapper;
 import com.kodoops.fenwork.freelance.presentation.request.SkillCategoryRequest;
 import com.kodoops.fenwork.freelance.presentation.response.ResponseDto;
@@ -12,7 +10,6 @@ import com.kodoops.fenwork.freelance.presentation.response.SkillCategoryResponse
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

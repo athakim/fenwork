@@ -4,7 +4,6 @@ import com.kodoops.fenwork.freelance.domain.model.Evaluation;
 import com.kodoops.fenwork.freelance.domain.model.Freelance;
 import com.kodoops.fenwork.freelance.domain.model.Portfolio;
 import com.kodoops.fenwork.freelance.domain.model.Skill;
-import com.kodoops.fenwork.freelance.domain.model.SkillCategory;
 import com.kodoops.fenwork.freelance.presentation.response.*;
 
 import java.util.List;
@@ -42,7 +41,7 @@ public class FreelanceResponseMapper {
                         skill.getId(),
                         skill.getName(),
                         skill.getCategory().getName(),
-                        mapSkillCategory(skill.getCategory())
+                        SkillCategoryResponseMapper.toResponse(skill.getCategory())
                 ))
                 .collect(Collectors.toList());
     }
@@ -78,19 +77,6 @@ public class FreelanceResponseMapper {
                 ))
                 .collect(Collectors.toList());
     }
-
-
-    private static com.kodoops.fenwork.freelance.presentation.response.SkillCategory mapSkillCategory(SkillCategory category) {
-        if (category == null) {
-            return null;
-        }
-
-        return new com.kodoops.fenwork.freelance.presentation.response.SkillCategory(
-              category.getId(),
-                category.getName(),
-                category.getDescription());
-    }
-
 
 
     public static List<FreelanceResponse> toResponseList(List<Freelance> freelances) {

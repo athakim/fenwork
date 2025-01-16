@@ -1,9 +1,8 @@
 package com.kodoops.fenwork.freelance.presentation.response;
 
-import lombok.*;
-
 
 public class SkillCategoryResponse {
+
     private String id;
     private String name;
     private String description;

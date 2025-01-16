@@ -6,12 +6,12 @@ public class SkillResponse {
     private String id;
     private String name;
     private String level;
-    private SkillCategory category;
+    private SkillCategoryResponse category;
 
     public SkillResponse() {
     }
 
-    public SkillResponse(String id, String name, String level, SkillCategory category) {
+    public SkillResponse(String id, String name, String level, SkillCategoryResponse category) {
         this.id = id;
         this.name = name;
         this.level = level;
@@ -42,11 +42,11 @@ public class SkillResponse {
         this.level = level;
     }
 
-    public SkillCategory getCategory() {
+    public SkillCategoryResponse getCategory() {
         return category;
     }
 
-    public void setCategory(SkillCategory category) {
+    public void setCategory(SkillCategoryResponse category) {
         this.category = category;
     }
 }

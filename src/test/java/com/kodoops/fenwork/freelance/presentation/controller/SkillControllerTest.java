@@ -39,8 +39,8 @@ class SkillControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"name\":\"Java\",\"categoryId\":\"1\",\"level\":\"Expert\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").isString())
-                .andExpect(jsonPath("$.name").value("Java"));
+                .andExpect(jsonPath("$.data.id").isString())
+                .andExpect(jsonPath("$.data.name").value("Java"));
     }
 
     @Test
